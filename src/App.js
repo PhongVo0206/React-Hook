@@ -3,7 +3,8 @@ import Accordion from './components/Accordion';
 import Search from './components/Search';
 import Dropdown from './components/Dropdown';
 import Translate from './components/Translate';
-
+import Routes from './components/Routes';
+import Header from './components/Header';
 const items = [
     {
         title: 'What is React?',
@@ -35,9 +36,27 @@ const options = [
 ]
 
 const App = () => {
+    const [selected, setSelected] = useState(options[0]);
     return (
         <div>
-        <Translate />
+        <Header />
+        <Routes path = "/">
+            <Accordion items = {items} />
+        </Routes>
+        <Routes path = "/list">
+            <Search />
+        </Routes>
+        <Routes path = "/dropdown">
+            <Dropdown 
+                label="Select a color"
+                options = {options}
+                selected={selected}
+                onSelectedChange={setSelected}
+            />
+        </Routes>
+        <Routes path = "/translate">
+            <Translate />
+        </Routes>
         </div>
     );
 };
